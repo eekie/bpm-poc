@@ -1,0 +1,6 @@
+
+description = ''
+dependencies {
+    compile group: 'org.activiti', name: 'activiti-engine', version:'5.20.0'
+    compile group: 'org.assertj', name: 'assertj-core', version:'3.5.2'
+}

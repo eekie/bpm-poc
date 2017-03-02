@@ -1,0 +1,67 @@
+apply plugin: 'org.sonarqube'
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.2.1"
+    }
+
+}
+sonarqube {
+    properties {
+        property "sonar.projectName", "Tails :: BPM POC"
+        property "sonar.projectKey", "org.team.tails:bpm-poc"
+    }
+}
+
+allprojects  {
+    apply plugin: 'idea'
+    apply plugin: 'maven'
+    apply plugin: 'java'
+    apply plugin: 'jacoco'
+
+
+    group = 'org.tails'
+    version = '0.1.0-SNAPSHOT'
+    sonarqube {
+        properties {
+            property "sonar.sourceEncoding", "UTF-8"
+            property "sonar.jacoco.reportPaths", ["$rootProject.buildDir/bpmdsltest/build/jacoco/test.exec","$rootProject.buildDir/bpmdsl/build/jacoco/test.exec"]
+        }
+    }
+
+//    jacoco {
+//        destinationFile = file("$rootProject.buildDir/jacoco/test.exec")
+//    }
+
+}
+
+subprojects {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "http://repo.maven.apache.org/maven2" }
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+
+    tasks.withType(Test) {
+        // redirect all coverage data to one file
+        // ... needs cleaning the data prior to the build to avoid accumulating coverage data of different runs.
+        // see `task cleanJacoco`
+        jacoco {
+            destinationFile = file("$rootProject.buildDir/jacoco/test.exec")
+        }
+    }
+
+}
+
+task cleanJacoco(dependsOn: 'clean') {  delete "$buildDir/jacoco" }

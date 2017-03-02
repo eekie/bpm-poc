@@ -1,0 +1,6 @@
+rootProject.name = 'bpm-poc'
+include ':bpm-dsl'
+include ':bpm-test'
+
+project(':bpm-dsl').projectDir = "$rootDir/bpm-dsl" as File
+project(':bpm-test').projectDir = "$rootDir/bpm-test" as File
