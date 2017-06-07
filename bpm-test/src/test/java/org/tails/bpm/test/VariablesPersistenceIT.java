@@ -39,7 +39,7 @@ public class VariablesPersistenceIT {
     }
 
     @Test
-    public void testVariablePersistence() {
+    public void testVariablePersistence() throws Exception {
         Map<String, Object> variables = new HashMap<>();
         variables.put("customer", new Customer("Meneertje Koekepeertje", "1234567", "meneertje.koekepeertje@example.com"));
         ProcessInstance pi = runtimeService.startProcessInstanceByKey("myProcess", variables);

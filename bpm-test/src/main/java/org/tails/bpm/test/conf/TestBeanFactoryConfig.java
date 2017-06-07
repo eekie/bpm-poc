@@ -1,5 +1,6 @@
 package org.tails.bpm.test.conf;
 
+import org.activiti.engine.RuntimeService;
 import org.tails.bpm.test.BpmTestUtil;
 import org.tails.bpmdsl.BpmAssertBuilderFactory;
 import org.activiti.engine.HistoryService;
@@ -17,6 +18,9 @@ public class TestBeanFactoryConfig {
     @Autowired
     private RepositoryService repositoryService;
 
+    @Autowired
+    private RuntimeService runtimeService;
+
     @Bean
     public BpmAssertBuilderFactory getFactory() {
         return new BpmAssertBuilderFactory(historyService);
@@ -24,7 +28,7 @@ public class TestBeanFactoryConfig {
 
     @Bean
     public BpmTestUtil getBpmTestUtil() {
-        return new BpmTestUtil(repositoryService, historyService);
+        return new BpmTestUtil(repositoryService, historyService, runtimeService);
     }
 
 }
