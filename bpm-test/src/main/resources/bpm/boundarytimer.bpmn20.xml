@@ -6,11 +6,11 @@
     <subProcess id="subprocess1" name="Sub Process">
       <startEvent id="startevent2" name="Start" activiti:async="true"></startEvent>
       <userTask id="usertask1" name="User Task" activiti:async="true"></userTask>
-      <sequenceFlow id="flow3" sourceRef="servicetask2" targetRef="usertask1"></sequenceFlow>
+      <sequenceFlow id="flow3" sourceRef="firstServiceTask" targetRef="usertask1"></sequenceFlow>
       <endEvent id="endevent2" name="End"></endEvent>
       <sequenceFlow id="flow4" sourceRef="servicetask3" targetRef="endevent2"></sequenceFlow>
-      <serviceTask id="servicetask2" name="Service Task" activiti:async="true" activiti:expression="${myServiceTask.execute(execution)}"></serviceTask>
-      <sequenceFlow id="flow7" sourceRef="startevent2" targetRef="servicetask2"></sequenceFlow>
+      <serviceTask id="firstServiceTask" name="Service Task" activiti:async="true" activiti:expression="${myServiceTask.execute(execution)}"></serviceTask>
+      <sequenceFlow id="flow7" sourceRef="startevent2" targetRef="firstServiceTask"></sequenceFlow>
       <serviceTask id="servicetask3" name="Service Task" activiti:expression="${myServiceTask.execute(execution)}"></serviceTask>
       <sequenceFlow id="flow9" sourceRef="usertask1" targetRef="servicetask3"></sequenceFlow>
     </subProcess>
@@ -18,7 +18,7 @@
     <sequenceFlow id="flow2" sourceRef="subprocess1" targetRef="endevent1"></sequenceFlow>
     <boundaryEvent id="boundarytimer1" name="Timer" attachedToRef="subprocess1" cancelActivity="false">
       <timerEventDefinition>
-        <timeDuration>PT3S</timeDuration>
+        <timeDuration>PT2S</timeDuration>
       </timerEventDefinition>
     </boundaryEvent>
     <endEvent id="endevent3" name="End"></endEvent>
@@ -49,7 +49,7 @@
       <bpmndi:BPMNShape bpmnElement="endevent2" id="BPMNShape_endevent2">
         <omgdc:Bounds height="35.0" width="35.0" x="540.0" y="230.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="servicetask2" id="BPMNShape_servicetask2">
+      <bpmndi:BPMNShape bpmnElement="firstServiceTask" id="BPMNShape_firstServiceTask">
         <omgdc:Bounds height="55.0" width="105.0" x="274.0" y="160.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="servicetask3" id="BPMNShape_servicetask3">

@@ -64,7 +64,7 @@ public class ActivitiEngineConfiguration {
         // Enable safe XML. See
         // http://activiti.org/userguide/index.html#advanced.safe.bpmn.xml
         processEngineConfiguration.setEnableSafeBpmnXml(true);
-        processEngineConfiguration.setAsyncExecutorActivate(Boolean.TRUE);
+        processEngineConfiguration.setAsyncExecutorActivate(Boolean.FALSE);
         processEngineConfiguration.setAsyncExecutorEnabled(Boolean.TRUE);
 
         processEngineConfiguration.setAsyncExecutorDefaultAsyncJobAcquireWaitTime(Integer.parseInt(environment.getProperty("asyncjob.acquire.waittime.millis")));
