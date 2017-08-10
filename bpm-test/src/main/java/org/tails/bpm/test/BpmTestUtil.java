@@ -88,7 +88,11 @@ public class BpmTestUtil {
     }
 
     HistoricActivityInstance waitForActivityToExist(final String activityName) throws Exception {
-        return waitFor(() -> historyService.createHistoricActivityInstanceQuery().activityName(activityName).singleResult());
+        return waitForActivityToExist(null, activityName);
+    }
+
+    HistoricActivityInstance waitForActivityToExist(final String pid, final String activityName) throws Exception {
+        return waitFor(() -> historyService.createHistoricActivityInstanceQuery().processInstanceId(pid).activityName(activityName).singleResult());
     }
 
     protected Boolean waitForAllProcessInstancesToComplete() throws Exception {
