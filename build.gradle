@@ -60,7 +60,7 @@ subprojects {
         jacoco {
             destinationFile = file("$rootProject.buildDir/jacoco/test.exec")
         }
-        //maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+        maxParallelForks = 2
     }
 
 }
