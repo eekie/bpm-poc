@@ -28,6 +28,10 @@ public class MyServiceTask {
             logger.info("timer: " + x.getId() + " " + x.getProcessInstanceId()));
     }
 
+    public void fail(DelegateExecution execution) {
+        throw new RuntimeException("something doesn't work");
+    }
+
     public void executeLong(DelegateExecution execution) {
         logger.info("start long invocation " + execution.getCurrentActivityId() + " pid=" + execution.getProcessInstanceId());
         try {
